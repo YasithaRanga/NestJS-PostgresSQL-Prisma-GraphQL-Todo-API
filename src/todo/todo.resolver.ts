@@ -13,9 +13,9 @@ export class TodoResolver {
     return this.todoService.create(createTodoInput);
   }
 
-  @Query(() => [Todo], { name: 'todo' })
-  findAll() {
-    return this.todoService.findAll();
+  @Query(() => [Todo], { name: 'todos' })
+  findAll(@Args('filter', { type: () => String }) filter: string) {
+    return this.todoService.findAll(filter);
   }
 
   @Query(() => Todo, { name: 'todo' })
@@ -31,5 +31,15 @@ export class TodoResolver {
   @Mutation(() => Todo)
   removeTodo(@Args('id', { type: () => Int }) id: number) {
     return this.todoService.remove(id);
+  }
+
+  @Mutation(() => Todo)
+  completeTodo(@Args('id', { type: () => Int }) id: number) {
+    return this.todoService.completeTodo(id);
+  }
+
+  @Mutation(() => Todo)
+  uncompleteTodo(@Args('id', { type: () => Int }) id: number) {
+    return this.todoService.uncompleteTodo(id);
   }
 }

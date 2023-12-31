@@ -7,7 +7,4 @@ export class CreateTodoInput {
 
   @Field()
   description: string;
-
-  @Field()
-  isCompleted: boolean;
 }
